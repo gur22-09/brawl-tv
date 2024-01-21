@@ -15,7 +15,7 @@ export const Search = () => {
     e.preventDefault();
     if (!value) return;
     const params = new URLSearchParams(searchParams);
-    console.log('how many times was i called');
+   
     if (value) {
       params.set('query', value);
     } else {
