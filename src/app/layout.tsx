@@ -19,18 +19,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider appearance={{ baseTheme: neobrutalism }}>
-      <html lang="en">
+    <html lang="en">
+      <ClerkProvider appearance={{ baseTheme: neobrutalism }}>
         <body className={inter.className}>
-          <ThemeProvider 
+          <ThemeProvider
             attribute="class"
             forcedTheme="light"
             storageKey="brawltv-theme"
-           >
+          >
             {children}
           </ThemeProvider>
         </body>
-      </html>
-    </ClerkProvider>
+      </ClerkProvider>
+    </html>
   );
 }
