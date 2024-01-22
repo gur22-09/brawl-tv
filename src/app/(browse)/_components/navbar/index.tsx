@@ -1,8 +1,7 @@
 import { Suspense } from 'react';
-import Actions from './actions';
+import Actions, { ActionsSkeleton } from './actions';
 import { Logo } from './logo';
 import Search from './search';
-import { ActionsSkeleton } from '@/components/ui/skeletons';
 
 export const Navbar = () => {
   return (

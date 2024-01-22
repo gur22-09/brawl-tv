@@ -1,4 +1,4 @@
-import { always, cond, equals, T, ifElse, isNil, curry } from 'ramda';
+import { always, cond, equals, T, ifElse, isNil } from 'ramda';
 import { db } from '@/lib/db';
 import { WebhookEventType } from '@clerk/nextjs/server';
 
