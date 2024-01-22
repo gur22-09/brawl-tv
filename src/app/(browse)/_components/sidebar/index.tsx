@@ -4,7 +4,6 @@ import { Toggle, ToggleSkeleton } from './toggle';
 import { Wrapper } from './wrapper';
 
 const SideBar = async () => {
-  await new Promise((res) => setTimeout(res, 6000)); 
   const recommended = await getRecommended();
 
   return (
