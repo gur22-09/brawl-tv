@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { neobrutalism } from "@clerk/themes";
 import { ThemeProvider } from "@/components/theme-providers";
+import { Toaster } from 'sonner';
 
 import "./globals.css";
 
@@ -27,6 +28,7 @@ export default function RootLayout({
             forcedTheme="light"
             storageKey="brawltv-theme"
           >
+            <Toaster theme="dark" position='bottom-center'/>
             {children}
           </ThemeProvider>
         </body>

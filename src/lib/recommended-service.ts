@@ -1,4 +1,4 @@
-import { andThen, pipe, tryCatch } from 'ramda';
+import { andThen, pipe } from 'ramda';
 import { getCurrentUser } from './auth-service';
 import { db } from './db';
 import { User } from '@prisma/client';

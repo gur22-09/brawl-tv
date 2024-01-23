@@ -1,11 +1,11 @@
 import { currentUser } from '@clerk/nextjs';
 import { db } from './db';
-import { either, identity, ifElse, isNil, pipe, prop, defaultTo, partial } from 'ramda';
+import { either, identity, ifElse, isNil, pipe, prop, defaultTo } from 'ramda';
 import { throwError } from './utils';
 import { type User as ClerkUser } from '@clerk/nextjs/server';
-import { type User } from '@prisma/client';
+import { UserType } from './types';
 
-export async function getCurrentUser(): Promise<User> {
+export async function getCurrentUser(): Promise<UserType> {
   const c = await currentUser();
   return pipe(
     ifElse(
