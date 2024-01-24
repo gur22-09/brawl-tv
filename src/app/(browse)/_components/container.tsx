@@ -3,10 +3,10 @@
 import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { cn } from '@/lib/utils';
 import { useSideBar } from '@/store/use-sidebar';
-import { useLayoutEffect } from 'react';
+import { ReactNode, useLayoutEffect } from 'react';
 
 interface ContainerProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const Container = ({ children }: ContainerProps) => {
@@ -23,8 +23,8 @@ export const Container = ({ children }: ContainerProps) => {
   }, [matches, onCollapse, onExpand]);
   
   return (
-    <main className={cn('flex-1', collapsed ? 'ml-[70px]' : 'lg:ml-60')}>
+    <div className={cn('flex-1', collapsed ? 'ml-[70px]' : 'lg:ml-60')}>
       {children}
-    </main>
+    </div>
   );
 };
