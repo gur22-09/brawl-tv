@@ -6,6 +6,8 @@ export type UserType = Prisma.UserGetPayload<{
   include: {
     following: true;
     followedBy: true;
+    blockedBy: true;
+    blocking: true;
   };
 }>;
 
@@ -16,3 +18,9 @@ export type FollowType = Prisma.FollowGetPayload<{
   };
 }>;
 
+export type BlockType = Prisma.BlockGetPayload<{
+  include: {
+    blocker: true;
+    blocked: true;
+  }
+}>

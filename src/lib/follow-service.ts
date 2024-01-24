@@ -18,6 +18,13 @@ export async function getFollowing(): Promise<Omit<FollowType, 'follower'>[]> {
         return await db.follow.findMany({
           where: {
             followerId: user.id,
+            following: {
+              blocking: {
+                none: {
+                  blockedId: user.id,
+                }
+              }
+            }
           },
           include: {
             following: true,
