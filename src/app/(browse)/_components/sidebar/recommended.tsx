@@ -24,7 +24,7 @@ export const Recommended = ({ data }: RecommendedProps) => {
           <UserItem
             username={user.username}
             imageUrl={user.imageUrl}
-            isLive={true}
+            isLive={false}
             key={user.id}
           />
         ))}

@@ -1,4 +1,4 @@
-import { andThen, pipe } from 'ramda';
+import { andThen, defaultTo, pipe } from 'ramda';
 import { getCurrentUser } from './auth-service';
 import { db } from './db';
 import { User } from '@prisma/client';
@@ -27,9 +27,22 @@ export async function getRecommended() {
       if (userId) {
         return await db.user.findMany({
           where: {
-            NOT: {
-              id: userId,
-            },
+            AND: [
+              {
+                NOT: {
+                  id: userId,
+                },
+              },
+              {
+                NOT: {
+                  followedBy: {
+                    some: {
+                      followerId: userId,
+                    },
+                  },
+                },
+              },
+            ],
           },
           orderBy: {
             createdAt: 'desc',
@@ -43,6 +56,6 @@ export async function getRecommended() {
         });
       }
     }),
-    andThen((users) => users || []),
+    andThen(defaultTo([])),
   )();
 }

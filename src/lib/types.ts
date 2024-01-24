@@ -15,3 +15,4 @@ export type FollowType = Prisma.FollowGetPayload<{
     following: true;
   };
 }>;
+

@@ -1,8 +1,33 @@
 import { db } from '@/lib/db';
-import { andThen, isNil, isNotNil, pipe } from 'ramda';
+import { andThen, isNil, isNotNil, pipe, defaultTo } from 'ramda';
 import { getCurrentUser } from './auth-service';
 import { throwError } from './utils';
 import { FollowType } from './types';
+
+export async function getFollowing(): Promise<Omit<FollowType, 'follower'>[]> {
+  return pipe(
+    async () => {
+      try {
+        return await getCurrentUser();
+      } catch {
+        return undefined;
+      }
+    },
+    andThen(async (user) => {
+      if (user) {
+        return await db.follow.findMany({
+          where: {
+            followerId: user.id,
+          },
+          include: {
+            following: true,
+          },
+        });
+      }
+    }),
+    andThen(defaultTo([])),
+  )();
+}
 
 /**
  * takes the id of the user we want to check if is following
