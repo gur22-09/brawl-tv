@@ -9,6 +9,10 @@ export const Navigation = () => {
   const pathName = usePathname();
   const { user } = useUser();
 
+  if (!user?.username) {
+    return <NavigationSkeleton />;
+  }
+
   const routes = [
     {
       label: 'Stream',
@@ -31,10 +35,6 @@ export const Navigation = () => {
       icon: Users,
     },
   ];
-
-  if (!user?.username) {
-    return <NavigationSkeleton />;
-  }
 
   return (
     <ul className="space-y-2 px-2 pt-4 lg:pt-0">
