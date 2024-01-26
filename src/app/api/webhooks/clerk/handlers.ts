@@ -21,6 +21,11 @@ async function handleUserCreated(payload: any) {
       externalUserId: payload.data.id,
       username: payload.data.username,
       imageUrl: payload.data.image_url,
+      stream: {
+        create: {
+          name: `${payload.data.username}'s stream`
+        }
+      }
     },
   });
 

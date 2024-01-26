@@ -1,4 +1,4 @@
-import { Prisma } from '@prisma/client';
+import { Prisma, Stream } from '@prisma/client';
 
 // https://github.com/prisma/prisma/discussions/10928
 
@@ -22,5 +22,10 @@ export type BlockType = Prisma.BlockGetPayload<{
   include: {
     blocker: true;
     blocked: true;
-  }
-}>
+  };
+}>;
+
+export type UpdateStreamValues = Pick<
+  Stream,
+  'name' | 'isChatEnabled' | 'isChatFollowersOnly' | 'isChatDelayed'
+>;
