@@ -7,3 +7,7 @@ export function cn(...inputs: ClassValue[]) {
 export const throwError = (msg: string) => {
   throw new Error(msg);
 };
+
+export function wait(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}

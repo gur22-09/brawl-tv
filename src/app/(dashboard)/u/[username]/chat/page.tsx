@@ -3,7 +3,6 @@ import { getStreamByUserId } from '@/lib/stream-service';
 import { ToggleCard } from './_components/toggle-card';
 
 const ChatPage = async () => {
-  await new Promise((res) => setTimeout(res, 10000));
   const self = await getCurrentUser();
   const stream = await getStreamByUserId(self.id);
 
