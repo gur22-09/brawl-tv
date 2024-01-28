@@ -9,9 +9,7 @@ interface WrapperProps {
 
 export const Wrapper = ({ children }: WrapperProps) => {
   const collapsed = useDashboardSideBar((state) => state.collapsed);
-  console.log({
-    collapsed,
-  });
+  
   return (
     <aside
       className={cn(

@@ -2,7 +2,7 @@ import { UrlCard } from './_components/url-card';
 import { getCurrentUser } from '@/lib/auth-service';
 import { getStreamByUserId } from '@/lib/stream-service';
 import { KeyCard } from './_components/key-card';
-import { ConnectModal } from './_components/connect-modal';
+import { GenerateModal } from './_components/generate-modal';
 
 const KeysPage = async () => {
   const self = await getCurrentUser();
@@ -16,7 +16,7 @@ const KeysPage = async () => {
     <div className="p-6">
       <div className="mb-4 flex items-center justify-between">
         <div className="text-2xl font-bold">Keys & URLs</div>
-        <ConnectModal />
+        <GenerateModal />
       </div>
       <div className="space-y-4">
         <UrlCard value={stream.serverUrl || ''} />
