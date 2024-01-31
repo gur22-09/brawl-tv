@@ -3,8 +3,16 @@ import { andThen, isNil, isNotNil, pipe, defaultTo } from 'ramda';
 import { getCurrentUser } from './auth-service';
 import { throwError } from './utils';
 import { FollowType } from './types';
+import { Follow, User, Stream } from '@prisma/client';
 
-export async function getFollowing(): Promise<Omit<FollowType, 'follower'>[]> {
+
+export async function getFollowing(): Promise<
+  (Follow & {
+    following: User & {
+      stream: Stream | null;
+    };
+  })[]
+> {
   return pipe(
     async () => {
       try {
@@ -22,12 +30,16 @@ export async function getFollowing(): Promise<Omit<FollowType, 'follower'>[]> {
               blocking: {
                 none: {
                   blockedId: user.id,
-                }
-              }
-            }
+                },
+              },
+            },
           },
           include: {
-            following: true,
+            following: {
+              include: {
+                stream: true,
+              },
+            },
           },
         });
       }

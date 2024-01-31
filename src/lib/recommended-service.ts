@@ -1,7 +1,6 @@
 import { andThen, defaultTo, pipe } from 'ramda';
 import { getCurrentUser } from './auth-service';
 import { db } from './db';
-import { User } from '@prisma/client';
 
 export async function getRecommended() {
   return pipe(
@@ -23,7 +22,7 @@ export async function getRecommended() {
     //     return new Promise<string>((res) => res('')); // for effective composition return type should match
     //   },
     // ),
-    andThen(async (userId): Promise<User[]> => {
+    andThen(async (userId) => {
       if (userId) {
         return await db.user.findMany({
           where: {
@@ -45,13 +44,16 @@ export async function getRecommended() {
               {
                 NOT: {
                   blocking: {
-                    some: { 
+                    some: {
                       blockedId: userId,
-                    }
-                  }
-                }
-              }
+                    },
+                  },
+                },
+              },
             ],
+          },
+          include: {
+            stream: true,
           },
           orderBy: {
             createdAt: 'desc',
@@ -59,6 +61,9 @@ export async function getRecommended() {
         });
       } else {
         return await db.user.findMany({
+          include: {
+            stream: true,
+          },
           orderBy: {
             createdAt: 'desc',
           },
