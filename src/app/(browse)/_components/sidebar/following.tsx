@@ -2,12 +2,12 @@
 
 import { useSideBar } from '@/store/use-sidebar';
 import { UserItem, UserItemSkeleton } from './user-item';
-import { Follow, Stream, User } from '@prisma/client';
+import { Follow, User } from '@prisma/client';
 
 interface FollowingProps {
   data: (Follow & {
     following: User & {
-      stream: Stream | null;
+      stream: { isLive: boolean } | null;
     };
   })[];
 }
@@ -16,9 +16,7 @@ export const Following = ({ data }: FollowingProps) => {
   const collapsed = useSideBar((state) => state.collapsed);
 
   if (!data.length) return null;
-  console.log({
-    data,
-  });
+
   return (
     <div>
       {!collapsed && (

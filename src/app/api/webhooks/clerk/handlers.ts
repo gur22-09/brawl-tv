@@ -15,7 +15,6 @@ export const handleClerkEvent = async (eventType: eventType, payload: any) => {
 };
 
 async function handleUserCreated(payload: any) {
-//  console.log('creating user', payload);
   await db.user.create({
     data: {
       externalUserId: payload.data.id,
@@ -23,9 +22,9 @@ async function handleUserCreated(payload: any) {
       imageUrl: payload.data.image_url,
       stream: {
         create: {
-          name: `${payload.data.username}'s stream`
-        }
-      }
+          name: `${payload.data.username}'s stream`,
+        },
+      },
     },
   });
 
@@ -33,7 +32,6 @@ async function handleUserCreated(payload: any) {
 }
 
 async function handleUserDeleted(payload: any) {
-//  console.log('deleting user', payload);
   await db.user.delete({
     where: {
       externalUserId: payload.data.id,
@@ -44,7 +42,6 @@ async function handleUserDeleted(payload: any) {
 }
 
 async function handleUserUpdated(payload: any): Promise<void | Response> {
-//  console.log('updating user', payload);
   const findUser = async () =>
     db.user.findUnique({
       where: {

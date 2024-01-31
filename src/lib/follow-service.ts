@@ -3,13 +3,12 @@ import { andThen, isNil, isNotNil, pipe, defaultTo } from 'ramda';
 import { getCurrentUser } from './auth-service';
 import { throwError } from './utils';
 import { FollowType } from './types';
-import { Follow, User, Stream } from '@prisma/client';
-
+import { Follow, User } from '@prisma/client';
 
 export async function getFollowing(): Promise<
   (Follow & {
     following: User & {
-      stream: Stream | null;
+      stream: { isLive: boolean } | null;
     };
   })[]
 > {
@@ -37,7 +36,11 @@ export async function getFollowing(): Promise<
           include: {
             following: {
               include: {
-                stream: true,
+                stream: {
+                  select: {
+                    isLive: true,
+                  },
+                },
               },
             },
           },
