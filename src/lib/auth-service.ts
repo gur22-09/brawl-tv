@@ -10,7 +10,6 @@ import {
   defaultTo,
   andThen,
 } from 'ramda';
-import { throwError } from './utils';
 import { type User as ClerkUser } from '@clerk/nextjs/server';
 import { User } from '@prisma/client';
 
@@ -19,13 +18,23 @@ export async function getCurrentUser(): Promise<User> {
   return pipe(
     ifElse(
       either(isNil, pipe(prop('username'), defaultTo(''), isNil)),
-      () => throwError('unauthorized'),
+      () => {
+        throw new Error('unauthorized');
+      },
       identity,
     ),
     async (user: ClerkUser) => {
       return await db.user.findUnique({ where: { externalUserId: user.id } });
     },
-    andThen(ifElse(isNil, () => throwError('no user found'), identity)),
+    andThen(
+      ifElse(
+        isNil,
+        () => {
+          throw new Error('no user found');
+        },
+        identity,
+      ),
+    ),
   )(c);
 }
 
@@ -34,13 +43,13 @@ export async function getSelfByUsername(username: string): Promise<User> {
   return pipe(
     ifElse(
       either(isNil, pipe(prop('username'), defaultTo(''), isNil)),
-      () => throwError('unauthorized'),
+      () =>{ throw new Error('unauthorized') },
       identity,
     ),
     async (self: ClerkUser) => {
       const user = await db.user.findUnique({ where: { username } });
       if (!user) {
-        return throwError('User not found');
+        throw new Error('User not found');
       }
 
       return { self, user };
@@ -48,7 +57,7 @@ export async function getSelfByUsername(username: string): Promise<User> {
     andThen(
       ifElse(
         ({ self, user }) => self.username !== user.username,
-        () => throwError('Unauthorized'), // a user can check his own dashboard only
+        () =>{ throw new Error('Unauthorized') }, // a user can check his own dashboard only
         prop('user'),
       ),
     ),

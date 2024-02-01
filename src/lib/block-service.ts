@@ -1,7 +1,6 @@
 import { db } from '@/lib/db';
 import { getCurrentUser } from './auth-service';
 import { andThen, isNil, isNotNil, pipe } from 'ramda';
-import { throwError } from './utils';
 import { BlockType } from './types';
 
 export async function isBlockedByUser(id: string): Promise<boolean> {
@@ -49,11 +48,11 @@ export async function blockUser(
     },
     andThen(async ({ self, other }) => {
       if (!other) {
-        return throwError('User not found');
+        throw new Error('User not found');
       }
 
       if (other.id === self.id) {
-        return throwError('You cannot block yourself');
+        throw new Error('You cannot block yourself');
       }
 
       const existingBlock = await db.block.findUnique({
@@ -66,7 +65,7 @@ export async function blockUser(
       });
 
       if (existingBlock) {
-        return throwError('Already blocked');
+        throw new Error('Already blocked');
       }
 
       return { selfId: self.id, otherId: other.id };
@@ -97,11 +96,11 @@ export async function unblockUser(id: string) {
     },
     andThen(async ({ self, other }) => {
       if (!other) {
-        return throwError('User not found');
+        throw new Error('User not found');
       }
 
       if (other.id === self.id) {
-        return throwError('You cannot un-block yourself');
+        throw new Error('You cannot un-block yourself');
       }
 
       const existingBlock = await db.block.findUnique({
@@ -114,7 +113,7 @@ export async function unblockUser(id: string) {
       });
 
       if (isNil(existingBlock)) {
-        return throwError('Not Blocking user');
+        throw new Error('Not Blocking user');
       }
 
       return existingBlock.id;

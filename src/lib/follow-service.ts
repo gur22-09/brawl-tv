@@ -1,7 +1,6 @@
 import { db } from '@/lib/db';
 import { andThen, isNil, isNotNil, pipe, defaultTo } from 'ramda';
 import { getCurrentUser } from './auth-service';
-import { throwError } from './utils';
 import { FollowType } from './types';
 import { Follow, User } from '@prisma/client';
 
@@ -95,11 +94,11 @@ export const followUser = async (id: string): Promise<FollowType> => {
     },
     andThen(async ({ self, other }) => {
       if (!other) {
-        return throwError('User not found');
+        throw new Error('User not found');
       }
 
       if (other.id === self.id) {
-        return throwError('You cannot follow yourself');
+        throw new Error('You cannot follow yourself');
       }
 
       const existingFollow = await db.follow.findFirst({
@@ -110,7 +109,7 @@ export const followUser = async (id: string): Promise<FollowType> => {
       });
 
       if (existingFollow) {
-        return throwError('Already following user');
+        throw new Error('Already following user');
       }
 
       return { selfId: self.id, otherId: other.id };
@@ -145,11 +144,11 @@ export const unfollowUser = async (id: string) => {
     },
     andThen(async ({ self, other }) => {
       if (!other) {
-        return throwError('User not found');
+        throw new Error('User not found');
       }
 
       if (other.id === self.id) {
-        return throwError('You cannot unfollow yourself');
+        throw new Error('You cannot unfollow yourself');
       }
 
       const existingFollow = await db.follow.findFirst({
@@ -160,7 +159,7 @@ export const unfollowUser = async (id: string) => {
       });
 
       if (isNil(existingFollow)) {
-        return throwError('Not following user');
+        throw new Error('Not following user');
       }
 
       return existingFollow.id;

@@ -3,7 +3,6 @@
 import { revalidatePath } from 'next/cache';
 import { followUser, unfollowUser } from '@/lib/follow-service';
 import { andThen, pipe } from 'ramda';
-import { throwError } from '@/lib/utils';
 
 export const onFollow = async (userId: string) => {
   return pipe(
@@ -11,7 +10,7 @@ export const onFollow = async (userId: string) => {
       try {
         return await followUser(id);
       } catch {
-        return throwError('Failed to follow user');
+        throw new Error('Failed to follow user');
       }
     },
     andThen((user) => {
@@ -30,7 +29,7 @@ export const onUnFollow = async (userId: string) => {
       try {
         return await unfollowUser(id);
       } catch {
-        return throwError('Failed to follow user');
+        throw new Error('Failed to follow user');
       }
     },
     andThen((user) => {
