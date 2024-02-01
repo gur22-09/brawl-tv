@@ -29,3 +29,9 @@ export type UpdateStreamValues = Pick<
   Stream,
   'name' | 'isChatEnabled' | 'isChatFollowersOnly' | 'isChatDelayed'
 >;
+
+
+export enum ChatVariant {
+  CHAT = "CHAT",
+  COMMUNITY = "COMMUNITY",
+}

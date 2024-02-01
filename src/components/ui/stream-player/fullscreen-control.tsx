@@ -17,7 +17,7 @@ export const FullScreenControl = ({
 
   return (
     <div className="flex items-center justify-center gap-4">
-      <Hint lable={label} asChild>
+      <Hint label={label} asChild>
         <button
           onClick={onToggle}
           className="text-white-p-1.5 rounded-lg hover:bg-white/10"
