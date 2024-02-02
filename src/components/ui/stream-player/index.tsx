@@ -2,10 +2,10 @@
 
 import { useViewerToken } from '@/hooks/useViewerToken';
 import { LiveKitRoom } from '@livekit/components-react';
-import { Video } from './video';
+import { Video, VideoSkeleton } from './video';
 import { useChatSidebar } from '@/store/use-chat-sidebar';
 import { cn } from '@/lib/utils';
-import { Chat } from './chat';
+import { Chat, ChatSkeleton } from './chat';
 import { ChatToggle } from './chat/chat-toggle';
 
 interface StreamPlayerProps {
@@ -29,7 +29,9 @@ export const StreamPlayer = ({
   const collapsed = useChatSidebar((state) => state.collapsed);
 
   if (!token || !name || !identity) {
-    return <div>unable to watch the stream</div>;
+    return (
+      <StreamPlayerSkeleton />
+    )
   }
 
   const serverUrl = process.env.NEXT_PUBLIC_LIVEKIT_WS_URL;
@@ -65,5 +67,19 @@ export const StreamPlayer = ({
         </div>
       </LiveKitRoom>
     </>
+  );
+};
+
+export const StreamPlayerSkeleton = () => {
+  return (
+    <div className="grid h-full grid-cols-1 lg:grid-cols-3 lg:gap-y-0 xl:grid-cols-3 2xl:grid-cols-6">
+      <div className="hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5">
+        <VideoSkeleton />
+        
+      </div>
+      <div className='col-span-1 bg-background'>
+       <ChatSkeleton />
+      </div>
+    </div>
   );
 };

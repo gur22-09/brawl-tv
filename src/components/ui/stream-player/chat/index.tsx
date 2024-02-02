@@ -10,10 +10,10 @@ import {
   useConnectionState,
   useRemoteParticipant,
 } from '@livekit/components-react';
-import { ChatHeader } from './chat-header';
+import { ChatHeader, ChatHeaderSkeleton } from './chat-header';
 import { ChatVariant } from '@/lib/types';
-import { ChatForm } from './chat-form';
-import { ChatList } from './chat-list';
+import { ChatForm, ChatFormSkeleton } from './chat-form';
+import { ChatList, ChatListSkeleton } from './chat-list';
 import { CommunityChat } from './community-chat';
 
 interface ChatProps {
@@ -100,3 +100,13 @@ export const Chat = ({
     </div>
   );
 };
+
+export const ChatSkeleton = () => {
+  return (
+    <div className='flex flex-col border-l border-b pt-0 h-[calc(100vh-80px)] border-2'>
+       <ChatHeaderSkeleton />
+       <ChatListSkeleton />
+       <ChatFormSkeleton />
+    </div>
+  );
+}

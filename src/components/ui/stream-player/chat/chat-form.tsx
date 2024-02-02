@@ -6,7 +6,6 @@ import { Button } from '../../button';
 import { FormEvent, useState } from 'react';
 import { Skeleton } from '../../skeleton';
 import { ChatInfo } from './chat-info';
-import DOMPurify from 'dompurify';
 
 interface ChatFormProps {
   onSubmit: () => void;
@@ -92,10 +91,10 @@ export const ChatForm = ({
 export const ChatFormSkeleton = () => {
   return (
     <div className="flex flex-col items-center gap-y-4 p-3">
-      <Skeleton className="h-10 w-full" />
+      <Skeleton className="h-10 w-full bg-slate-200" />
       <div className="ml-auto flex items-center gap-x-2">
-        <Skeleton className="h-7 w-7" />
-        <Skeleton className="h-7 w-12" />
+        <Skeleton className="h-7 w-7 bg-slate-200" />
+        <Skeleton className="h-7 w-12 bg-slate-200" />
       </div>
     </div>
   );
