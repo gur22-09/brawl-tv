@@ -2,6 +2,7 @@
 
 import { ReceivedChatMessage } from '@livekit/components-react';
 import { ChatMessage } from './chat-message';
+import { Skeleton } from '../../skeleton';
 
 interface ChatListProps {
   messages: ReceivedChatMessage[];
@@ -18,7 +19,7 @@ export const ChatList: React.FC<ChatListProps> = ({ messages, isHidden }) => {
       </div>
     );
   }
-  
+
   return (
     <div className="flex h-full flex-1 flex-col-reverse overflow-y-auto p-3">
       {messages.map((message) => (
@@ -27,3 +28,11 @@ export const ChatList: React.FC<ChatListProps> = ({ messages, isHidden }) => {
     </div>
   );
 };
+
+export const ChatSkeleton = () => {
+    return (
+        <div className='flex h-full items-center justify-center'>
+         <Skeleton className='w-1/2 h-6' />
+        </div>
+    )
+}

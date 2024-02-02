@@ -1,10 +1,10 @@
 'use client';
 
 import { clean, cn, wait } from '@/lib/utils';
-import { Input } from '../input';
-import { Button } from '../button';
+import { Input } from '../../input';
+import { Button } from '../../button';
 import { FormEvent, useState } from 'react';
-import { Skeleton } from '../skeleton';
+import { Skeleton } from '../../skeleton';
 import { ChatInfo } from './chat-info';
 import DOMPurify from 'dompurify';
 

@@ -14,6 +14,7 @@ import { ChatHeader } from './chat-header';
 import { ChatVariant } from '@/lib/types';
 import { ChatForm } from './chat-form';
 import { ChatList } from './chat-list';
+import { CommunityChat } from './community-chat';
 
 interface ChatProps {
   hostName: string;
@@ -75,7 +76,11 @@ export const Chat = ({
       <ChatHeader />
       {variant === ChatVariant.COMMUNITY && (
         <>
-          <p>Community Chat</p>
+          <CommunityChat
+            hostName={hostName}
+            viewerName={viewerName}
+            isHidden={isHidden}
+          />
         </>
       )}
       {variant === ChatVariant.CHAT && (

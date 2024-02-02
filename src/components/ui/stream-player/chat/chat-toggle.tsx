@@ -2,8 +2,8 @@
 
 import { useChatSidebar } from '@/store/use-chat-sidebar';
 import { ArrowLeftFromLine, ArrowRightFromLine } from 'lucide-react';
-import { Hint } from '../hint';
-import { Button } from '../button';
+import { Hint } from '../../hint';
+import { Button } from '../../button';
 
 export const ChatToggle = () => {
   const { collapsed, onExpand, onCollapse } = useChatSidebar((state) => state);

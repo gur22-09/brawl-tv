@@ -6,7 +6,7 @@ import { Video } from './video';
 import { useChatSidebar } from '@/store/use-chat-sidebar';
 import { cn } from '@/lib/utils';
 import { Chat } from './chat';
-import { ChatToggle } from './chat-toggle';
+import { ChatToggle } from './chat/chat-toggle';
 
 interface StreamPlayerProps {
   hostName: string;

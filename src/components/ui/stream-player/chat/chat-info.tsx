@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Hint } from '../hint';
+import { Hint } from '../../hint';
 import { Info } from 'lucide-react';
 
 interface ChatInfoProps {

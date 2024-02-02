@@ -24,7 +24,7 @@ export const ChatMessage = ({ data }: ChatMessageProps) => {
         <p className="whitespace-nowrap text-sm font-semibold select-none">
           <span className="truncate" style={{ color: color }}>
             {data.from?.name}
-          </span>
+          </span>:
         </p>
         <p className="break-all text-sm">{data.message}</p>
       </div>
