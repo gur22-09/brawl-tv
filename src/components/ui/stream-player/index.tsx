@@ -7,9 +7,14 @@ import { useChatSidebar } from '@/store/use-chat-sidebar';
 import { cn } from '@/lib/utils';
 import { Chat, ChatSkeleton } from './chat';
 import { ChatToggle } from './chat/chat-toggle';
+import { Header, HeaderSkeleton } from './header';
+import { StreamInfo } from './stream-info';
 
 interface StreamPlayerProps {
+  hostImageUrl: string;
+  streamName: string;
   hostName: string;
+  thumbnailUrl: string | null;
   hostIdentity: string;
   isChatEnabled: boolean;
   isChatDelayed: boolean;
@@ -24,14 +29,15 @@ export const StreamPlayer = ({
   isChatDelayed,
   isChatFollowersOnly,
   isFollowing,
+  streamName,
+  hostImageUrl,
+  thumbnailUrl,
 }: StreamPlayerProps) => {
   const { token, name, identity } = useViewerToken(hostIdentity);
   const collapsed = useChatSidebar((state) => state.collapsed);
 
   if (!token || !name || !identity) {
-    return (
-      <StreamPlayerSkeleton />
-    )
+    return <StreamPlayerSkeleton />;
   }
 
   const serverUrl = process.env.NEXT_PUBLIC_LIVEKIT_WS_URL;
@@ -53,6 +59,20 @@ export const StreamPlayer = ({
       >
         <div className="hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5">
           <Video hostName={hostName} hostId={hostIdentity} />
+          <Header
+            hostName={hostName}
+            hostId={hostIdentity}
+            viewerIdentity={identity}
+            hostImageUrl={hostImageUrl}
+            isFollowing={isFollowing}
+            streamName={streamName}
+          />
+          <StreamInfo
+            streamName={streamName}
+            thumbnailUrl={thumbnailUrl || ''}
+            hostId={hostIdentity}
+            viewerId={identity}
+          />
         </div>
         <div className={cn('col-span-1', collapsed && 'hidden')}>
           <Chat
@@ -75,10 +95,10 @@ export const StreamPlayerSkeleton = () => {
     <div className="grid h-full grid-cols-1 lg:grid-cols-3 lg:gap-y-0 xl:grid-cols-3 2xl:grid-cols-6">
       <div className="hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5">
         <VideoSkeleton />
-        
+        <HeaderSkeleton />
       </div>
-      <div className='col-span-1 bg-background'>
-       <ChatSkeleton />
+      <div className="col-span-1 bg-background">
+        <ChatSkeleton />
       </div>
     </div>
   );

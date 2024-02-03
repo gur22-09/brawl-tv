@@ -19,11 +19,14 @@ const CreatorPage = async ({ params }: CreatorPageProps) => {
   return (
     <div className="h-full">
       <StreamPlayer
+        thumbnailUrl={user.stream.thumbnailUrl}
+        hostImageUrl={user.imageUrl}
+        streamName={user.stream.name}
         hostName={user.username}
         hostIdentity={user.id}
-        isChatEnabled={!!user?.stream?.isChatEnabled}
-        isChatDelayed={!!user?.stream?.isChatDelayed}
-        isChatFollowersOnly={!!user?.stream?.isChatFollowersOnly}
+        isChatEnabled={user?.stream?.isChatEnabled}
+        isChatDelayed={user?.stream?.isChatDelayed}
+        isChatFollowersOnly={user?.stream?.isChatFollowersOnly}
         isFollowing
       />
     </div>

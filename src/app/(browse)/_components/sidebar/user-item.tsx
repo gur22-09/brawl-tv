@@ -1,4 +1,4 @@
-import { LiveBadge } from '@/components/live-badge';
+import { LiveBadge } from '@/components/ui/live-badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { UserAvatar } from '@/components/user-avatar';

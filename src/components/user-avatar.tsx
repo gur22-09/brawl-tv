@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LiveBadge } from './live-badge';
+import { LiveBadge } from './ui/live-badge';
 
 const avatarSizes = cva('', {
   variants: {
