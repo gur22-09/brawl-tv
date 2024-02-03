@@ -73,8 +73,8 @@ export const EditStreamModal = ({
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="link" size="sm" className="ml-auto">
-          <div className="h-auto w-auto rounded-md bg-blue-600 p-2">
-            <Pencil className="h-5 w-5" />
+          <div className="h-auto w-auto rounded-md bg-primary p-2">
+            <Pencil className="h-5 w-5 text-slate-50" />
           </div>
         </Button>
       </DialogTrigger>

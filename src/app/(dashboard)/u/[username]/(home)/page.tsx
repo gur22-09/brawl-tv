@@ -10,7 +10,10 @@ interface CreatorPageProps {
 
 const CreatorPage = async ({ params }: CreatorPageProps) => {
   const u = await currentUser();
-  const user = await getUserByUsername(params.username, true);
+  const user = await getUserByUsername(params.username, {
+    includeStream: true,
+    inlcudeFollowCount: true,
+  });
 
   if (!user || u?.id != user.externalUserId || !user.stream) {
     throw new Error('Unauthorized');
@@ -27,6 +30,8 @@ const CreatorPage = async ({ params }: CreatorPageProps) => {
         isChatEnabled={user?.stream?.isChatEnabled}
         isChatDelayed={user?.stream?.isChatDelayed}
         isChatFollowersOnly={user?.stream?.isChatFollowersOnly}
+        followerCount={user._count.followedBy}
+        bio={user.bio}
         isFollowing
       />
     </div>

@@ -2,7 +2,7 @@ import { db } from './db';
 
 export const getUserByUsername = async (
   username: string,
-  includeStream = false,
+  { includeStream = false, inlcudeFollowCount = false } = {},
 ) => {
   const user = await db.user.findUnique({
     where: {
@@ -10,6 +10,11 @@ export const getUserByUsername = async (
     },
     include: {
       stream: includeStream,
+      _count: {
+        select: {
+          followedBy: inlcudeFollowCount,
+        },
+      },
     },
   });
 
@@ -26,5 +31,5 @@ export const getUserById = async (id: string, includeStream = false) => {
     },
   });
 
-  return user
+  return user;
 };

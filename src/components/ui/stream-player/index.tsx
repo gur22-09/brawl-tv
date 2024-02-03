@@ -8,7 +8,8 @@ import { cn } from '@/lib/utils';
 import { Chat, ChatSkeleton } from './chat';
 import { ChatToggle } from './chat/chat-toggle';
 import { Header, HeaderSkeleton } from './header';
-import { StreamInfo } from './stream-info';
+import { Info } from './info';
+import { About } from './about';
 
 interface StreamPlayerProps {
   hostImageUrl: string;
@@ -16,6 +17,8 @@ interface StreamPlayerProps {
   hostName: string;
   thumbnailUrl: string | null;
   hostIdentity: string;
+  bio: string | null;
+  followerCount: number;
   isChatEnabled: boolean;
   isChatDelayed: boolean;
   isChatFollowersOnly: boolean;
@@ -32,6 +35,8 @@ export const StreamPlayer = ({
   streamName,
   hostImageUrl,
   thumbnailUrl,
+  followerCount,
+  bio,
 }: StreamPlayerProps) => {
   const { token, name, identity } = useViewerToken(hostIdentity);
   const collapsed = useChatSidebar((state) => state.collapsed);
@@ -67,11 +72,18 @@ export const StreamPlayer = ({
             isFollowing={isFollowing}
             streamName={streamName}
           />
-          <StreamInfo
+          <Info
             streamName={streamName}
             thumbnailUrl={thumbnailUrl || ''}
             hostId={hostIdentity}
             viewerId={identity}
+          />
+          <About
+            hostName={hostName}
+            hostId={hostIdentity}
+            viewerId={identity}
+            followerCount={followerCount}
+            bio={bio}
           />
         </div>
         <div className={cn('col-span-1', collapsed && 'hidden')}>
