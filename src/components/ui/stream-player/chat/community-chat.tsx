@@ -6,7 +6,7 @@ import { Input } from '../../input';
 import { ScrollArea } from '../../scroll-area';
 import { CommunityItem } from './community-item';
 import { LocalParticipant, RemoteParticipant } from 'livekit-client';
-import { useDebouncedCallback } from 'use-debounce';
+
 
 interface CommunityChatProps {
   hostName: string;
@@ -39,9 +39,9 @@ export const CommunityChat = ({
     });
   }, [participants, value]);
 
-  const onChange = useDebouncedCallback((newValue: string) => {
+  const onChange = (newValue: string) => {
     setValue(newValue);
-  });
+  };
 
   if (isHidden) {
     return (

@@ -4,14 +4,14 @@ import { SearchIcon, X } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useDebouncedCallback } from 'use-debounce';
+
 
 export const Search = () => {
   const searchParams = useSearchParams();  
   const { push } = useRouter();
   const [value, setValue] = useState('');
 
-  const onSubmit = useDebouncedCallback((e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value) return;
     const params = new URLSearchParams(searchParams);
@@ -23,7 +23,7 @@ export const Search = () => {
     }
    
     push(`/search?${params.toString()}`);
-  }, 300);
+  }
 
   const onClear = () => {
     setValue('');
@@ -44,7 +44,6 @@ export const Search = () => {
         <X onClick={onClear} className="absolute right-14 top-2.5 h-5 w-5 cursor-pointer text-muted-foreground transition hover:opacity-75" />
       )}
       <Button
-        type="submit"
         size="sm"
         variant="ghost"
         className="h-10 rounded-l-none"

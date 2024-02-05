@@ -4,7 +4,7 @@ import { LiveBadge } from './live-badge';
 import { Skeleton } from './skeleton';
 
 interface ThumbnailProps {
-  src: string;
+  src: string | null;
   fallback: string;
   isLive: boolean;
   username: string;
@@ -18,16 +18,16 @@ export const Thumbnail = ({
 }: ThumbnailProps) => {
   return (
     <div className="group relative aspect-video cursor-pointer rounded-md">
-      <div className="absolute inset-0 flex items-center rounded-md bg-indigo-600 opacity-0 transition-opacity group-hover:opacity-100" />
+      <div className="absolute inset-0 flex items-center rounded-md bg-orange-400 opacity-0 transition-opacity group-hover:opacity-100" />
       {src ? (
         <Image
           src={src}
           fill
           alt="Thumbnail"
-          className="rounded-md object-cover transition-transform group-hover:-translate-y-2 group-hover:translate-x-2"
+          className="rounded-md object-cover transition-transform group-hover:-translate-y-2 group-hover:translate-x-2 group-hover:shadow-2xl"
         />
       ) : (
-        <div className="flex h-full w-full flex-col items-center justify-center gap-y-4 rounded-md bg-background transition-transform group-hover:-translate-y-2 group-hover:translate-x-2">
+        <div className="flex h-full w-full flex-col items-center justify-center gap-y-4 rounded-md bg-background transition-transform group-hover:-translate-y-2 group-hover:translate-x-2 group-hover:shadow-2xl">
           <UserAvatar
             size="lg"
             showBadge
@@ -38,7 +38,7 @@ export const Thumbnail = ({
         </div>
       )}
       {isLive && src && (
-        <div className="absolute right-2 bottom-2 transition-transform group-hover:-translate-y-2 group-hover:translate-x-2">
+        <div className="absolute bottom-2 right-2 transition-transform group-hover:-translate-y-2 group-hover:translate-x-2">
           <LiveBadge />
         </div>
       )}
