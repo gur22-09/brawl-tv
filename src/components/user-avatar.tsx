@@ -42,7 +42,7 @@ export const UserAvatar = ({
       >
         <AvatarImage src={imageUrl} alt={username} className="object-cover" />
         <AvatarFallback>
-          <UserAvatorSkeleton />
+          <UserAvatarSkeleton />
         </AvatarFallback>
       </Avatar>
       {canShowBadge && (
@@ -56,6 +56,6 @@ export const UserAvatar = ({
 
 interface UserAvatarSkeletonProps extends VariantProps<typeof avatarSizes> {}
 
-export const UserAvatorSkeleton = ({ size }: UserAvatarSkeletonProps) => {
+export const UserAvatarSkeleton = ({ size }: UserAvatarSkeletonProps) => {
   return <Skeleton className={cn('rounded-full', avatarSizes({ size }))} />;
 };

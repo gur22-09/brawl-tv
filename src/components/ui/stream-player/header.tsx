@@ -1,6 +1,6 @@
 'use client';
 
-import { UserAvatar, UserAvatorSkeleton } from '@/components/user-avatar';
+import { UserAvatar, UserAvatarSkeleton } from '@/components/user-avatar';
 import { VerifiedMark } from '../verified-mark';
 import {
   useParticipants,
@@ -74,7 +74,7 @@ export const HeaderSkeleton = () => {
   return (
     <div className="flex flex-col items-start justify-between gap-y-2 px-4 lg:flex-row lg:gap-y-0">
       <div className="flex items-center gap-x-2">
-        <UserAvatorSkeleton size="lg" />
+        <UserAvatarSkeleton size="lg" />
         <div className="space-y-2">
           <Skeleton className="h-6 w-32" />
           <Skeleton className="h-6 w-32" />
