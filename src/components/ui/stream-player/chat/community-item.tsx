@@ -53,7 +53,7 @@ export const CommunityItem = ({
           <Button
             variant="ghost"
             disabled={pending}
-            onClick={() => {}}
+            onClick={onClick}
             className="h-auto w-auto p-1 opacity-0 transition group-hover:opacity-100"
           >
             <MinusCircle className="h-4 w-4 text-muted-foreground" />

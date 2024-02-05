@@ -1,3 +1,5 @@
+'use client';
+
 import { useAuth } from '@clerk/nextjs';
 import { Button } from '../button';
 import { Heart } from 'lucide-react';
@@ -34,7 +36,7 @@ export const Actions = ({ hostId, isFollowing }: ActionsProps) => {
     startTransition(() => {
       onUnFollow(hostId)
         .then((data) => {
-          toast.success(`UnFollowed ${data.following.username}`);
+          toast.success(`Unfollowed ${data.following.username}`);
         })
         .catch(() => {
           toast.error('Something went wrong');
@@ -63,7 +65,7 @@ export const Actions = ({ hostId, isFollowing }: ActionsProps) => {
       className="w-full lg:w-auto"
     >
       <Heart
-        className={cn('mr-2 h-4 w-4', isFollowing ? 'fill-white' : 'fill-none')}
+        className={cn('mr-2 h-4 w-4', isFollowing ? 'fill-black' : 'fill-none')}
       />
       {isFollowing ? 'Unfollow' : 'Follow'}
     </Button>

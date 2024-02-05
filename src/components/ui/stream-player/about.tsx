@@ -1,3 +1,5 @@
+'use client'
+
 import { EditBioModal } from './edit-bio-modal';
 
 interface AboutProps {

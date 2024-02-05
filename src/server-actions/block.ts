@@ -1,26 +1,38 @@
-'use server'
+'use server';
 
+import { getCurrentUser } from '@/lib/auth-service';
 import { blockUser, unblockUser } from '@/lib/block-service';
-import { throwError } from '@/lib/utils';
+import { RoomServiceClient } from 'livekit-server-sdk';
 import { revalidatePath } from 'next/cache';
 import { andThen, pipe } from 'ramda';
 
 //TODO - write a live stream disconnect
 //TODO - kick the user from steam also
 
+const roomService = new RoomServiceClient(
+  process.env.LIVEKIT_API_URL!,
+  process.env.LIVEKIT_API_KEY,
+  process.env.LIVEKIT_API_SECRET,
+);
+
 export async function onBlock(id: string) {
   return pipe(
     async (id) => {
+      const self = await getCurrentUser();
       try {
-        return await blockUser(id);
+        await blockUser(id);
+      } catch {}
+
+      try {
+        await roomService.removeParticipant(self.id, id);
       } catch {
-        return throwError('Failed to Block user');
+        throw new Error('failed to block user');
       }
+
+      return self;
     },
     andThen((user) => {
-      revalidatePath('/');
-
-      revalidatePath(`/${user.blocked.username}`);
+      revalidatePath(`/u/${user.username}/community`);
 
       return user;
     }),
@@ -33,7 +45,7 @@ export async function onUnBlock(id: string) {
       try {
         return await unblockUser(id);
       } catch {
-        return throwError('Failed to un-Block user');
+        throw new Error('Failed to un-Block user');
       }
     },
     andThen((user) => {

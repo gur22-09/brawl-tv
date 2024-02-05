@@ -1,3 +1,5 @@
+'use client'
+
 import { useRef, useState, useTransition } from 'react';
 import {
   Dialog,
