@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## About
+
+A fun streaming web app which i use why try to show off my skills in Brawl Stars.
+btw i'm diamond three in Power League and have more than 45k trohpies.
+If you wanna play together just hit me up or catch me in my stream.
 
 ## Getting Started
 
