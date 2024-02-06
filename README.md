@@ -1,6 +1,6 @@
 ## About
 
-A fun streaming web app which i use why try to show off my skills in Brawl Stars.
+A fun streaming web app which i use to show off my skills in Brawl Stars.
 btw i'm diamond three in Power League and have more than 45k trohpies.
 If you wanna play together just hit me up or catch me in my stream.
 
