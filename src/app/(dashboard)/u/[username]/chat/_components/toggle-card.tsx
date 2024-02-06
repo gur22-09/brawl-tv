@@ -21,7 +21,6 @@ interface ToggleCardProps {
 export const ToggleCard = ({ label, value, field }: ToggleCardProps) => {
   const [isPending, startTransition] = useTransition();
   const onChange = () => {
-    console.log('onChage switch')
     startTransition(() => {
       updateStream({ [field]: !value })
         .then(() => {

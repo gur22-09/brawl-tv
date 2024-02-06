@@ -50,11 +50,9 @@ export async function POST(req: Request) {
   }
 
   // Get the ID and type
-  const { id } = evt.data;
   const eventType = evt.type;
 
-  console.log(`Webhook with and ID of ${id} and type of ${eventType}`);
-  // console.log('Webhook body:', body)}
+  
  
   return await handleClerkEvent(eventType, payload)
 }
