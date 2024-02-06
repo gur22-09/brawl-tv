@@ -1,5 +1,11 @@
 import { SignIn } from '@clerk/nextjs';
+import { Logo } from '../../_components/logo';
 
-export default function Page() {
-  return <SignIn />;
+export default async function Page() {
+  return (
+    <>
+      <Logo />
+      <SignIn />
+    </>
+  );
 }
