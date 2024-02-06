@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { Results, ResultsSkeleton } from './_components/results';
 import { Suspense } from 'react';
@@ -7,6 +8,10 @@ interface SearchPageProps {
     query?: string;
   };
 }
+
+export const metadata: Metadata = {
+  title: 'Search',
+};
 
 const SearchPage = ({ searchParams }: SearchPageProps) => {
   if (!searchParams.query) {

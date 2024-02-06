@@ -1,20 +1,21 @@
 import { always, cond, equals, T, ifElse, isNil } from 'ramda';
 import { db } from '@/lib/db';
 import { WebhookEventType } from '@clerk/nextjs/server';
+import { resetIngresses } from '@/server-actions/ingress';
 
 type eventType = WebhookEventType;
 
 export const handleClerkEvent = async (eventType: eventType, payload: any) => {
   return cond([
-    [equals('user.created'), () => handleUserCreated(payload)],
-    [equals('user.updated'), () => handleUserUpdated(payload)],
-    [equals('user.deleted'), () => handleUserDeleted(payload)],
+    [equals('user.created'), async () => await handleUserCreated(payload)],
+    [equals('user.updated'), async () => await handleUserUpdated(payload)],
+    [equals('user.deleted'), async () => await handleUserDeleted(payload)],
     //@ts-ignore-next-line
     [T, always(new Response('', { status: 200 }))],
   ])(eventType);
 };
 
-async function handleUserCreated(payload: any) {
+async function handleUserCreated(payload: any): Promise<Response> {
   await db.user.create({
     data: {
       externalUserId: payload.data.id,
@@ -31,7 +32,8 @@ async function handleUserCreated(payload: any) {
   return new Response('', { status: 200 });
 }
 
-async function handleUserDeleted(payload: any) {
+async function handleUserDeleted(payload: any): Promise<Response> {
+  await resetIngresses(payload.data.id);
   await db.user.delete({
     where: {
       externalUserId: payload.data.id,
@@ -41,7 +43,7 @@ async function handleUserDeleted(payload: any) {
   return new Response('', { status: 200 });
 }
 
-async function handleUserUpdated(payload: any): Promise<void | Response> {
+async function handleUserUpdated(payload: any): Promise<Response> {
   const findUser = async () =>
     db.user.findUnique({
       where: {

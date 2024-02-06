@@ -1,6 +1,11 @@
 import { Button } from '@/components/ui/button';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+
+export const metadata: Metadata = {
+  title: '404 | not found',
+};
 
 const NotFound = () => {
   return (
@@ -17,21 +22,18 @@ const NotFound = () => {
         <Image
           className="large hidden lg:block"
           src="/mortis.webp"
-          width={250}
           height={400}
           alt=""
         />
         <Image
           className="medium hidden sm:block lg:hidden"
           src="/mortis.webp"
-          width={200}
           height={250}
           alt=""
         />
         <Image
           className="small block sm:hidden"
           src="/mortis.webp"
-          width={150}
           height={200}
           alt=""
         />

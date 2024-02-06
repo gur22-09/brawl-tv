@@ -1,6 +1,6 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { sanitize } from 'dompurify';
+import dompurify from 'dompurify';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -26,4 +26,4 @@ export const stringToColor = (str: string) => {
   return color;
 };
 
-export const clean = (dirty: string) => sanitize(dirty);
+export const clean = (dirty: string) => dompurify.sanitize(dirty);

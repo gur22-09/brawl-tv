@@ -1,8 +1,13 @@
+import type { Metadata } from 'next';
 import { UrlCard } from './_components/url-card';
 import { getCurrentUser } from '@/lib/auth-service';
 import { getStreamByUserId } from '@/lib/stream-service';
 import { KeyCard } from './_components/key-card';
 import { GenerateModal } from './_components/generate-modal';
+
+export const metadata: Metadata = {
+  title: 'Generate Keys',
+};
 
 const KeysPage = async () => {
   const self = await getCurrentUser();

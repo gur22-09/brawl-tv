@@ -6,9 +6,6 @@ import { RoomServiceClient } from 'livekit-server-sdk';
 import { revalidatePath } from 'next/cache';
 import { andThen, pipe } from 'ramda';
 
-//TODO - write a live stream disconnect
-//TODO - kick the user from steam also
-
 const roomService = new RoomServiceClient(
   process.env.LIVEKIT_API_URL!,
   process.env.LIVEKIT_API_KEY,
@@ -48,12 +45,13 @@ export async function onUnBlock(id: string) {
         throw new Error('Failed to un-Block user');
       }
     },
-    andThen((user) => {
+    andThen(async (blocked) => {
+      const user = await getCurrentUser();
       revalidatePath('/');
 
-      revalidatePath(`/${user.blocked.username}`);
+      revalidatePath(`/u/${user.username}/community`);
 
-      return user;
+      return blocked;
     }),
   )(id);
 }

@@ -130,3 +130,16 @@ export async function unblockUser(id: string) {
     }),
   )(id);
 }
+
+export async function getBlockedUsers(id: string) {
+  return pipe(async (id) => {
+    return await db.block.findMany({
+      where: {
+        blockerId: id,
+      },
+      include: {
+        blocked: true,
+      },
+    });
+  })(id);
+}

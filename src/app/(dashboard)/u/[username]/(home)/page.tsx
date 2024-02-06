@@ -1,3 +1,4 @@
+import type { Metadata, ResolvingMetadata } from 'next';
 import { StreamPlayer } from '@/components/ui/stream-player';
 import { getUserByUsername } from '@/lib/user-service';
 import { currentUser } from '@clerk/nextjs';
@@ -5,6 +6,15 @@ import { currentUser } from '@clerk/nextjs';
 interface CreatorPageProps {
   params: {
     username: string;
+  };
+}
+
+export async function generateMetadata(
+  props: CreatorPageProps,
+  parent: ResolvingMetadata,
+): Promise<Metadata> {
+  return {
+    title: `${props.params.username}'s Dashboard`,
   };
 }
 

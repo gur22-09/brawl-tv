@@ -1,6 +1,11 @@
+import type { Metadata } from "next";
 import { getCurrentUser } from '@/lib/auth-service';
 import { getStreamByUserId } from '@/lib/stream-service';
 import { ToggleCard } from './_components/toggle-card';
+
+export const metadata: Metadata = {
+  title: "Chat Settings"
+}
 
 const ChatPage = async () => {
   const self = await getCurrentUser();

@@ -119,6 +119,7 @@ export const followUser = async (id: string): Promise<FollowType> => {
         data: {
           followerId: selfId,
           followingId: otherId,
+          createdAt: new Date(),
         },
         include: {
           following: true,
