@@ -38,5 +38,5 @@ export async function handleLivekitEvent(event: WebhookEvent) {
     ],
     //@ts-ignore-next-line
     [T, always(new Response('', { status: 200 }))],
-  ])(event.event || '');
+  ])(event.event || '') as Promise<Response>;
 }
