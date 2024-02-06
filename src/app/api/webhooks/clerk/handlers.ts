@@ -7,15 +7,18 @@ type eventType = WebhookEventType;
 
 export const handleClerkEvent = async (eventType: eventType, payload: any) => {
   return cond([
+     //@ts-ignore
     [equals('user.created'), async () => await handleUserCreated(payload)],
+    //@ts-ignore
     [equals('user.updated'), async () => await handleUserUpdated(payload)],
+    //@ts-ignore
     [equals('user.deleted'), async () => await handleUserDeleted(payload)],
-    //@ts-ignore-next-line
+     //@ts-ignore-next-line
     [T, always(new Response('', { status: 200 }))],
   ])(eventType);
 };
 
-async function handleUserCreated(payload: any): Promise<Response> {
+async function handleUserCreated(payload: any) {
   await db.user.create({
     data: {
       externalUserId: payload.data.id,
@@ -32,7 +35,7 @@ async function handleUserCreated(payload: any): Promise<Response> {
   return new Response('', { status: 200 });
 }
 
-async function handleUserDeleted(payload: any): Promise<Response> {
+async function handleUserDeleted(payload: any) {
   await resetIngresses(payload.data.id);
   await db.user.delete({
     where: {
@@ -43,7 +46,7 @@ async function handleUserDeleted(payload: any): Promise<Response> {
   return new Response('', { status: 200 });
 }
 
-async function handleUserUpdated(payload: any): Promise<Response> {
+async function handleUserUpdated(payload: any) {
   const findUser = async () =>
     db.user.findUnique({
       where: {

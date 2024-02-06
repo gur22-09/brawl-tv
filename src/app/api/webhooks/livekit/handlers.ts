@@ -6,6 +6,7 @@ export async function handleLivekitEvent(event: WebhookEvent) {
   return cond([
     [
       equals('ingress_started'),
+      //@ts-ignore
       async () => {
         await db.stream.update({
           where: {
@@ -21,6 +22,7 @@ export async function handleLivekitEvent(event: WebhookEvent) {
     ],
     [
       equals('ingress_ended'),
+      //@ts-ignore
       async () => {
         await db.stream.update({
           where: {
