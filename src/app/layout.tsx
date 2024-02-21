@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { neobrutalism } from "@clerk/themes";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { ThemeProvider } from "@/components/theme-providers";
 import { Toaster } from 'sonner';
 
@@ -30,6 +32,8 @@ export default function RootLayout({
           >
             <Toaster theme="dark" position='bottom-center'/>
             {children}
+            <Analytics />
+            <SpeedInsights />
           </ThemeProvider>
         </body>
       </ClerkProvider>
