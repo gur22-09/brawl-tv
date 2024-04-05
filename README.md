@@ -1,8 +1,9 @@
 ## About
+This is a just a fun hobby project. 
 
-A fun streaming web app which i use to show off my skills in Brawl Stars.
-btw i'm diamond three in Power League and have more than 45k trohpies.
-If you wanna play together just hit me up or catch me in my stream.
+# Common Issues
+- if unable to create ingress probably generate a new stream keys from dashboard
+- this is only handle around 3-4 hours of HD streaming due to limited video encoding in free tier of livekit
 
 ## Getting Started
 
